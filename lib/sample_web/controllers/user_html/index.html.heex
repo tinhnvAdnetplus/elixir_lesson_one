@@ -16,9 +16,9 @@
       label="契約形態"
       options={Sample.Users.get_contract_type_list() |> Enum.with_index(0)}
     />
-    <div class="input-group w-1/4">
+    <%# <div class="input-group w-1/4">
       <.input field={f[:start_date]} type="date" label="加入日" />
-    </div>
+    </div> %>
     <div class="form-inline">
       <.label>加入日</.label>
       <div class="input-group">
