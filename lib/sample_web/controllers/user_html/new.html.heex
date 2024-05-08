@@ -1,0 +1,8 @@
+<.header>
+  新しいユーザー
+  <:subtitle>このフォームを使用して、データベース内のユーザー レコードを管理します。</:subtitle>
+</.header>
+
+<.user_form changeset={@changeset} action={~p"/users"} />
+
+<.back navigate={~p"/users"}>ユーザーに戻る</.back>

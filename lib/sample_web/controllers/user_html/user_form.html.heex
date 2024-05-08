@@ -1,0 +1,21 @@
+<.simple_form :let={f} for={@changeset} action={@action}>
+  <.error :if={@changeset.action}>
+    Oops, something went wrong! Please check the errors below.
+  </.error>
+  <.input field={f[:name]} type="text" label="名前" class="inline-input" />
+  <.input field={f[:address]} type="text" label="住所" />
+  <.input field={f[:phone]} type="text" label="電話番号" />
+  <.input field={f[:email]} type="text" label="メールアドレス" required />
+  <.input field={f[:birthday]} type="date" label="生年月日" />
+  <.input field={f[:department]} type="text" label="部署" />
+  <.input
+    field={f[:contract_type]}
+    type="select"
+    label="契約形態"
+    options={Sample.Users.get_contract_type_list() |> Enum.with_index(0)}
+  />
+  <.input field={f[:start_date]} type="date" label="加入日" />
+  <:actions>
+    <.button>ユーザーの保存</.button>
+  </:actions>
+</.simple_form>

@@ -1,0 +1,24 @@
+<.header>
+  ユーザー <%= @user.id %>
+  <:subtitle>これはデータベースからのユーザー レコードです。</:subtitle>
+  <:actions>
+    <.link href={~p"/users/#{@user}/edit"}>
+      <.button>ユーザーの編集</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="名前"><%= @user.name %></:item>
+  <:item title="住所"><%= @user.address %></:item>
+  <:item title="電話番号"><%= @user.phone %></:item>
+  <:item title="メールアドレス"><%= @user.email %></:item>
+  <:item title="生年月日"><%= @user.birthday %></:item>
+  <:item title="部署"><%= @user.department %></:item>
+  <:item title="契約形態">
+    <%= Sample.Users.get_contract_type_label(@user.contract_type) %>
+  </:item>
+  <:item title="入社日を入力できるフォーム"><%= @user.start_date %></:item>
+</.list>
+
+<.back navigate={~p"/users"}>ユーザーに戻る</.back>

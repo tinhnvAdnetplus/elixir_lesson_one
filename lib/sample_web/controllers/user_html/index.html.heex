@@ -1,0 +1,59 @@
+<.header>
+  ユーザーリスト
+  <:actions>
+    <.link href={~p"/users/new"}>
+      <.button>新しいユーザー</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.form_search>
+  <.simple_form :let={f} for={@conn.params} action={}>
+    <.input field={f[:department]} type="text" label="部署" />
+    <.input
+      field={f[:contract_type]}
+      type="select"
+      label="契約形態"
+      options={Sample.Users.get_contract_type_list() |> Enum.with_index(0)}
+    />
+    <div class="input-group w-1/4">
+      <.input field={f[:start_date]} type="date" label="加入日" />
+    </div>
+    <div class="form-inline">
+      <.label>加入日</.label>
+      <div class="input-group">
+        <div class="" style="display: inline-block;">
+          <.input field={f[:year]} type="number" max="9999" min="1000" placeholder="yyyy" />
+        </div>
+        <span class="input-group-text" style="display: inline-block;">/</span>
+        <div class="" style="display: inline-block;">
+          <.input field={f[:month]} type="number" max="12" min="1" placeholder="mm" />
+        </div>
+      </div>
+    </div>
+    <:actions>
+      <.button>検索</.button>
+    </:actions>
+  </.simple_form>
+</.form_search>
+
+<.table id="users" rows={@users} row_click={&JS.navigate(~p"/users/#{&1}")}>
+  <:col :let={user} label="名前"><%= user.name %></:col>
+  <:col :let={user} label="電話番号"><%= user.phone %></:col>
+  <:col :let={user} label="部署"><%= user.department %></:col>
+  <:col :let={user} label="契約形態">
+    <%= Sample.Users.get_contract_type_label(user.contract_type) %>
+  </:col>
+  <:col :let={user} label="加入日"><%= user.start_date %></:col>
+  <:action :let={user}>
+    <div class="sr-only">
+      <.link navigate={~p"/users/#{user}"}>見せる</.link>
+    </div>
+    <.link navigate={~p"/users/#{user}/edit"}>編集</.link>
+  </:action>
+  <:action :let={user}>
+    <.link href={~p"/users/#{user}"} method="delete" data-confirm="本気ですか?">
+      消去
+    </.link>
+  </:action>
+</.table>
